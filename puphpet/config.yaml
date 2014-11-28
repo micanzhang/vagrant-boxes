@@ -144,7 +144,7 @@ nginx:
             ssl_cert: ''
             ssl_key: ''
 php:
-    install: 0
+    install: 1
     version: '56'
     composer: '1'
     composer_home: ''
@@ -163,7 +163,7 @@ php:
     timezone: Asia/Shanghai
     mod_php: 0
 hhvm:
-    install: '1'
+    install: '0'
     nightly: 0
     composer: '1'
     composer_home: ''
@@ -175,7 +175,7 @@ hhvm:
         error_reporting: '-1'
     timezone: null
 xdebug:
-    install: '0'
+    install: '1'
     settings:
         xdebug.default_enable: '1'
         xdebug.remote_autostart: '0'
