@@ -1,8 +1,8 @@
 ---
 vagrantfile-local:
     vm:
-        box: puphpet/debian75-x32
-        box_url: puphpet/debian75-x32
+        box: puphpet/debian75-x64
+        box_url: puphpet/debian75-x64
         hostname: 'homestead'
         memory: '1024'
         cpus: '1'
@@ -16,6 +16,9 @@ vagrantfile-local:
                 gO6MQh3jL1UQ:
                     host: '8000'
                     guest: '80'
+                mysql:
+                    host: '33060'
+                    guest: '3306'
         post_up_message: ''
         provider:
             virtualbox:
@@ -36,8 +39,8 @@ vagrantfile-local:
                     - '--parser future'
         synced_folder:
             i32WLVI63nVW:
-                source: ./
-                target: /var/www
+                source: ../../Code
+                target: /home/vagrant/Code
                 sync_type: default
                 rsync:
                     args:
@@ -83,10 +86,10 @@ apache:
         - rewrite
     vhosts:
         v2YgKV9SHQFm:
-            servername: awesome.dev
+            servername: v.pptv.com
             serveraliases:
-                - www.awesome.dev
-            docroot: /var/www/awesome
+                - list.pptv.com
+            docroot: /home/vagrant/Code/www/webmain/public
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -110,11 +113,25 @@ nginx:
         proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
     vhosts:
+        cms_admin:
+            server_name: dev.synacast.com
+            www_root: /home/vagrant/Code/www/web/admin/htdocs
+            listen_port: '80'
+            location: \.php$
+            index_files:
+                - index.html
+                - index.htm
+                - index.php
+            envvars:
+                - 'APP_ENV dev'
+            engine: php
+            ssl_cert: ''
+            ssl_key: '' 
         kNCZaZkW1GiD:
-            server_name: awesome.dev
+            server_name: v.pptv.com
             server_aliases:
-                - www.awesome.dev
-            www_root: /var/www/awesome
+                - list.pptv.com
+            www_root: /home/vagrant/Code/www/webmain/public
             listen_port: '80'
             location: \.php$
             index_files:
@@ -143,7 +160,7 @@ php:
         display_errors: On
         error_reporting: '-1'
         session.save_path: /var/lib/php/session
-    timezone: America/Chicago
+    timezone: Asia/Shanghai
     mod_php: 0
 hhvm:
     install: '1'
@@ -177,7 +194,7 @@ ruby:
         LYLmrCbb11Uj:
             version: 2.1.2
             gems:
-                - gem
+                - 
             bundler: '1'
 nodejs:
     install: '0'
