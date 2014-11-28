@@ -1,0 +1,5 @@
+homestead
+=========
+
+vagrant config file.
+
